@@ -1,3 +1,6 @@
-//
-// Created by illey on 5/24/2025.
-//
+#include "Hashmap.h"
+
+int main() {
+
+  return 0;
+}
