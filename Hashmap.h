@@ -45,6 +45,6 @@ private:
   HashMap& operator=(const HashMap&) = delete;
 };
 
-#include "Hashmap.cpp"
+#include "Hashmap.ipp"
 
 #endif

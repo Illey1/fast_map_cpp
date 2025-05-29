@@ -1,3 +1,6 @@
+#ifndef HASHMAP_IPP
+#define HASHMAP_IPP
+
 #include "Hashmap.h"
 
 template <typename K, typename V>
@@ -32,3 +35,5 @@ int HashMap<K, V>::hash(const K& key) {}
 
 template <typename K, typename V>
 void HashMap<K, V>::rehash() {}
+
+#endif
