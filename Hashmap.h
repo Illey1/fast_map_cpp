@@ -34,9 +34,10 @@ private:
   size_t capacity; //total number of buckets
   size_t num_of_elements; //number of key-value pairs
 
+  //size the hashtable will get to before rehashing
   static constexpr double MAX_LOAD_FACTOR = 0.75;
 
-  int hash(const K& key); //hashes key to index
+  int hash(const K& key) const; //hashes key to index
   void rehash();// doubles capacity and inserts into new array for resizing
 
 
