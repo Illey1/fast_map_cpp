@@ -52,11 +52,10 @@ bool HashMap<K, V>::erase(const K& key) {
   Node* curr = this->buckets[target];
   if (!curr) return false;
   if (curr->key == key) {
-    Node* temp = curr;
-    delete temp;
     this->buckets[target] = curr->next;
-    this->num_of_elements--;
-    return true;
+  	delete curr;
+  	this->num_of_elements--;
+  	return true;
   }
   while (curr->next) {
     if (curr->next->key == key) {
