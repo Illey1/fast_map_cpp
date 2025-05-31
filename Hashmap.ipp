@@ -71,6 +71,7 @@ bool HashMap<K, V>::erase(const K& key) {
   return false;
 }
 
+// Attempts to locate specified key and returns either the key value or nullptr if key isn't in map
 template <typename K, typename V>
 V* HashMap<K, V>::find(const K& key) {
   int target = hash(key);
@@ -84,11 +85,17 @@ V* HashMap<K, V>::find(const K& key) {
   return nullptr;
 }
 
+// Returns the size of HashMap
 template <typename K, typename V>
-size_t HashMap<K, V>::size() const {}
+size_t HashMap<K, V>::size() const {
+  return this->num_of_elements;
+}
 
+// Returns true or false on whether HashMap is empty
 template <typename K, typename V>
-bool HashMap<K, V>::empty() const {}
+bool HashMap<K, V>::empty() const {
+  return this->num_of_elements == 0;
+}
 
 template <typename K, typename V>
 void HashMap<K, V>::clear() {}
