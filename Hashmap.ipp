@@ -14,7 +14,7 @@ HashMap<K, V>::~HashMap() {}
 template <typename K, typename V>
 void HashMap<K, V>::insert(const K& key, const V& value) {
   int index = hash(key);
-  Node* curr = buckets[index];
+  Node* curr = this->buckets[index];
 
   //this is the linked list traversal we spoke of
   while (curr) {
@@ -26,8 +26,8 @@ void HashMap<K, V>::insert(const K& key, const V& value) {
   }
 
   Node* new_node = new Node(key, value, buckets[index]);
-  buckets[index] = new_node;
-  num_elements++;
+  this->buckets[index] = new_node;
+  this->num_elements++;
 
   if (static_cast<double>(num_elements) / capacity > MAX_LOAD_FACTOR) {
     rehash();
@@ -58,6 +58,23 @@ int HashMap<K, V>::hash(const K& key) const {
 }
 
 template <typename K, typename V>
-void HashMap<K, V>::rehash() {}
+void HashMap<K, V>::rehash() {
+  Node** old_buckets = this->buckets;
+  size_t old_capacity = this->capacity;
+
+  this->capacity *= 2;
+  this->buckets = new Node*[capacity]();
+
+  for (size_t = 0; i < old_capacity; i++) {
+    Node* curr = old_buckets[i];
+    while (curr) {
+      insert(curr->key, curr->value);
+      Node* temp = curr;
+      curr = curr->next;
+      delete temp;
+    }
+  }
+  delete[] old_buckets;
+}
 
 #endif
