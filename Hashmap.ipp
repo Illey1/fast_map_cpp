@@ -97,11 +97,37 @@ bool HashMap<K, V>::empty() const {
   return this->num_of_elements == 0;
 }
 
+//remove all key-value pairs
+//free the memory
 template <typename K, typename V>
-void HashMap<K, V>::clear() {}
+void HashMap<K, V>::clear() {
+  if (this->num_of_elements == 0) { return; }
+  //loop through the array and then traverse the linked lists, then just delete, then set num_of_elements
+  for (size_t i = 0; i < this->capacity; i++) {
+    Node* curr = this->buckets[i];
+    while (curr) {
+      Node* temp = curr;
+      curr = curr->next;
+      delete temp;
+    }
+  }
+  this->num_of_elements = 0;
+}
 
+//print capacity, number of elements, how full table is (numelemtns / capactiy),
 template <typename K, typename V>
-void HashMap<K, V>::print_stats() const {}
+void HashMap<K, V>::print_stats() const {
+  std::cout << "Capacity: " << this->capacity << std::endl;
+  std::cout << "Size: " << this->num_of_elements << std::endl;
+  std::cout << "How full (percentage): " << static_cast<double>(this->num_of_elements) /this->capacity << std::endl;
+  int empty_buckets = 0;
+  for (size_t i = 0; i < this->capacity; i++) {
+    if (this->buckets[i] == nullptr) {
+      empty_buckets++;
+    }
+  }
+  std::cout << "Empty buckets: " << empty_buckets << std::endl;
+}
 
 template <typename K, typename V>
 int HashMap<K, V>::hash(const K& key) const {
