@@ -110,6 +110,7 @@ void HashMap<K, V>::clear() {
       curr = curr->next;
       delete temp;
     }
+    this->buckets[i] = nullptr;
   }
   this->num_of_elements = 0;
 }
@@ -146,10 +147,10 @@ void HashMap<K, V>::rehash() {
   for (size_t i = 0; i < old_capacity; i++) {
     Node* curr = old_buckets[i];
     while (curr) {
+      Node* next = curr->next;
       insert(curr->key, curr->value);
-      Node* temp = curr;
-      curr = curr->next;
-      delete temp;
+      delete curr;
+      curr = next;
     }
   }
   delete[] old_buckets;
